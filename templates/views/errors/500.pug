@@ -1,6 +1,18 @@
 extends ../../layouts/default
-
+	
 block content
-	.container
-		h1 Error (500)
-		p.lead Sorry, the site has encountered an error.
+	.container-sm: .pv-2
+		h1!=errorTitle || 'Ошибка сервера'
+		if 'object' == typeof errorMsg
+			div(style='margin: 30px 0;').debug!= htmlStringify(errorMsg)
+		else
+			p!= utils.textToHTML(errorMsg) || 'Извините, но с сервером случилась неприятность.<br><br>Свяжитесь с нами и мы постараемся решить вашу проблему как можно скорее.'
+		if err
+			hr.mv-2
+			h3 Детали ошибки
+			pre.mb-2: code
+				if 'string' == typeof err
+					!= utils.textToHTML(err)
+
+		p Сообщите нам если видите эту ошибку 
+			a(href='mailto:service@toirus.ru', target='_blank') по этому адресу.

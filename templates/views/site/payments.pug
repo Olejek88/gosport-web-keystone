@@ -1,0 +1,54 @@
+extends ../../layouts/default
+
+block intro
+
+block flash-messages
+block content
+	.container-sm
+		.page-intro
+			span.entypo.entypo-cycle(font-size:32px)
+			|   Транзакции
+			br
+		.page-content.tile.ph-0.pv-2.mb-2
+			.panel-heading
+				| Все счета
+			table.pl-1
+				thead
+					tr
+						th.thac Счет#
+						th.thac Услуга
+						th.thac Дата транзакции
+						th.thac Название
+						th.thac Метод оплаты
+						th.thac Сумма						
+						th.thac Статус
+				tbody
+					if payments
+						each payment in payments
+							if payment
+								tr
+									td.pl-1 
+										a(href='/payment/' + payment._id)| ##{payment.paymentId}
+									td.pl-1 
+										if payment.service
+											a(href='/service/' + payment.service._id)| #{payment.service.name}
+									td.pl-1.no-wrap 
+										font.bgray #{payment._.createdAt.format('DD MMM YYYY hh:mm:ss')}
+									td.pl-1 
+										a(href='/payment/' + payment._id)|  #{payment.name}
+									td.pl-1
+										if payment.method
+											|#{payment.method.name}
+									td.pl-1 #{payment.sum}р.
+									if payment.status === 'new'
+										td.pl-1 
+											font.status-label.opened| не оплачен
+									if payment.status === 'no verified'
+										td.pl-1 
+											font.status-label.process| не подтвержден
+									if payment.status === 'verified'
+										td.pl-1 
+											font.status-label.closed| оплачен
+					else
+						h3.text-muted Нет запросов
+

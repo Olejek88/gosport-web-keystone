@@ -9,7 +9,7 @@
 
 exports.create = {
 	User: [
-		{ 'name.first': 'Admin', 'name.last': 'User', 'email': 'olejek8@yandex.ru', 'password': 'admin', 'isAdmin': true },
+		{ 'name.first': 'Admin', 'name.last': 'User', 'email': 'olejek8@yandex.ru', 'password': 'admin', 'isAdmin': true,  'uuid': '7e763de4-9f5b-11e7-abc4-cec278b6b50a', 'type': '2', 'age': '39', 'phone': '+79227000293',},
 	],
 };
 

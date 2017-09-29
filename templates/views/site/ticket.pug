@@ -1,0 +1,47 @@
+extends ../../layouts/default
+
+block intro
+
+block flash-messages
+
+block content
+	.container-sm
+		.page-intro
+			p.lead Редактирование запроса
+		.page-content.tile.ph-0.pv-2.mb-2
+			.panel-heading
+				span.entypo.entypo-cog
+				|  #{ticket.name}
+			br
+			if ticket
+				p.lead.ph-1 
+					font.bgray #{ticket._.createdAt.format('DD MMM YYYY hh:mm:ss')}
+					a(href='/ticket/' + ticket._id)|  ##{ticket.ticketId}
+					a(href='/ticket/' + ticket._id)|  #{ticket.name}
+					if ticket.ticketStatus === 'open'
+						font.status-label.opened|  Открыт
+					if ticket.ticketStatus === 'process'
+						font.status-label.process|  В процессе
+					if ticket.ticketStatus === 'closed'
+						font.status-label.closed|  Закрыт
+					br
+					|#{ticket.message}
+			if tickets
+				each ticketref in tickets
+					if ticketref
+						if ticketref.user.toString() == locals.user._id.toString()
+							p.lead.ph-1 
+								font.bgray #{ticketref._.createdAt.format('DD MMM YYYY hh:mm:ss')}
+								a(href='/ticket/' + ticketref._id)|  #{ticketref.name}
+								br
+								|#{ticketref.message}
+						else
+							p.lead.ph-1.tright 
+								font.bgray #{ticketref._.createdAt.format('DD MMM YYYY hh:mm:ss')}
+								|  #{ticketref.name}
+								br
+								|#{ticketref.message}
+			br
+			br
+			br
+			a.btn-right.btn.btn-primary.btn-right(href='/ticketnew/'+ticket.ticketId) Добавить к запросу

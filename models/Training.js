@@ -2,6 +2,7 @@
  *  $Id$
  */
 const keystone = require('keystone');
+const uuid = require('uuid');
 
 const Types = keystone.Field.Types;
 // const ObjectId = require('mongodb').ObjectID;
@@ -11,23 +12,27 @@ const Training = new keystone.List('Training', {
 });
 
 Training.add({
-	stadiumId: { type: Types.Number, noedit: true, initial: true, label: 'Идентификатор' },
-	uuid: { type: String, initial: true, default: '', required: true, label: 'UUID' },
+	uuid: {
+		type: String,
+		index: { unique: true },
+		default: uuid.v4,
+		label: 'Идентификатор',
+	},
 	user: { type: Types.Relationship, ref: 'User', many: false, label: 'Игрок' },
-	sport: { type: Types.Relationship, ref: 'Sport', many: false, label: 'Спорт' },
-	team: { type: Types.Relationship, ref: 'Team', many: false, label: 'Команда' },
-	title: { type: String, initial: true, default: '', required: true, label: 'Имя' },
+	sport: { type: Types.Relationship, initial: true, ref: 'Sport', many: false, label: 'Спорт' },
+	team: { type: Types.Relationship, initial: true, ref: 'Team', many: false, label: 'Команда' },
+	name: { type: String, initial: true, default: '', required: true, label: 'Имя' },
 	comment: { type: String, initial: true, default: '', required: true, label: 'Описание' },
 	cost: { type: Number, initial: true, default: '0', required: true, label: 'Цена' },
 	players: { type: Number, initial: true, default: '0', required: true, label: 'Игроков' },
-	level: { type: Types.Relationship, ref: 'Level', many: false, label: 'Уровень' },
-	date: { type: Types.Datetime, default: Date.now, label: 'Дата' },
-	stadium: { type: Types.Relationship, ref: 'Stadiom', many: false, label: 'Стадион' },
+	level: { type: Types.Relationship, initial: true, ref: 'Level', many: false, label: 'Уровень' },
+	date: { type: Types.Datetime, default: Date.now, initial: true, label: 'Дата' },
+	stadium: { type: Types.Relationship, ref: 'Stadium', initial: true, many: false, label: 'Стадион' },
 	createdAt: { type: Types.Datetime, default: Date.now },
 	updatedAt: { type: Types.Datetime, default: Date.now },
 });
 
 Training.defaultSort = '-createdAt';
-Training.defaultColumns = 'title,sport,level';
+Training.defaultColumns = 'name,sport,level';
 
 Training.register();

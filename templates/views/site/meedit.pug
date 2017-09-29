@@ -1,0 +1,156 @@
+extends ../../layouts/default
+
+block intro
+
+block flash-messages
+
+block content
+	.container-sm
+		//.page-intro
+			//p.lead Приветствуем тебя #{user.playername} 
+		+flash-messages(messages)
+		.page-content.tile.ph-0.pv-2.mb-2.fleft
+			.panel-heading
+				span.entypo.entypo-user
+				|  #{user.name}
+			br
+			form(method='post', enctype='multipart/form-data', autocomplete='off', novalidate).form-horizontal
+				input(type='hidden', name='action', value='profile.details')
+				.form-group.ph-1
+					label.col-sm-2.control-label Имя
+					.col-sm-10: .form-row
+						.col-xs-6: input(type='text', name='name' value=user.name).form-control
+				.form-group.ph-1
+					label.col-sm-2.control-label Email
+					.col-sm-10: input(type='email', name='email' value=user.email).form-control
+				.form-group.ph-1
+					label.col-sm-2.control-label Тип
+					.col-sm-10
+						select(name='type').form-control
+							option(value='0') (выберите)
+							if user.type == '1'
+								option(value="1" selected) Игрок
+							else
+								option(value="1") Игрок
+							if user.type == '2'
+								option(value="2" seleted) Организатор
+							else								
+								option(value="2") Организатор							
+							if user.type == '3'
+								option(value="3" selected) Организатор-игрок
+							else
+								option(value="3") Организатор-игрок
+				.form-group.ph-1
+					label.col-sm-2.control-label Возраст
+					.col-sm-10: .form-row
+						.col-xs-6: input(type='text', name='age' value=user.age).form-control
+				.form-group.ph-1
+					label.col-sm-2.control-label Телефон
+					.col-sm-10: .form-row
+						.col-xs-6: input(type='text', name='phone' value=user.phone).form-control
+				.form-group.ph-1
+					label.col-sm-2.control-label Профиль в vk
+					.col-sm-10: .form-row
+						.col-xs-6: input(type='text', name='vk' value=user.vk).form-control
+				.form-group.ph-1
+					hr
+					.padd 
+						img(src='images/hockey_32.jpg')
+						|      Хоккей
+				.form-group.ph-1
+					label.col-sm-2.control-label Мой уровень
+					.col-sm-10: .form-row
+						.col-xs-6
+						select(name='hockeylevel').form-control
+							option(value='') (выберите)
+							if hockeylevels
+								each hockeylevel in hockeylevels									
+									if hockeysport && (hockeylevel._id.toString() == hockeysport.level.toString())
+										option(value=hockeylevel.id selected)= hockeylevel.name
+									else
+										option(value=hockeylevel.id)= hockeylevel.name
+				.form-group.ph-1
+					label.col-sm-2.control-label Амплуа
+					.col-sm-10: .form-row
+						.col-xs-6
+						select(name='hockeyamplua').form-control
+							option(value='') (выберите)
+							if hockeyampluas
+								each amplua in hockeyampluas
+									if hockeysport && (amplua._id.toString() == hockeysport.amplua.toString())
+										option(value=amplua.id selected)= amplua.name
+									else
+										option(value=amplua.id)= amplua.name
+				.form-group.ph-1
+					label.col-sm-2.control-label Команда
+					.col-sm-10: .form-row
+						.col-xs-6
+						select(name='hockeyteam').form-control
+							option(value='') (выберите)
+							if hockeyteams
+								each team in hockeyteams
+									if hockeysport && (team._id.toString() == hockeysport.team.toString())
+										option(value=team.id selected)= team.name
+									else
+										option(value=team.id)= team.name
+				.form-group.ph-1
+					hr
+					.padd
+						img(src='images/football_32.jpg')
+						|      Футбол
+				.form-group.ph-1
+					label.col-sm-2.control-label Мой уровень
+					.col-sm-10: .form-row
+						.col-xs-6
+						select(name='footballlevel').form-control
+							option(value='') (выберите)
+							if footballlevels
+								each footballlevel in footballlevels
+									if footballsport && footballsport.level && (footballlevel._id.toString() == footballsport.level.toString())
+										option(value=footballlevel.id selected)= footballlevel.name
+									else
+										option(value=footballlevel.id)= footballlevel.name
+				.form-group.ph-1
+					label.col-sm-2.control-label Амплуа
+					.col-sm-10: .form-row
+						.col-xs-6
+						select(name='footballamplua').form-control
+							option(value='') (выберите)
+							if footballampluas
+								each amplua in footballampluas
+									if footballsport && footballsport.amplua && (amplua._id.toString() == footballsport.amplua.toString())
+										option(value=amplua.id selected)= amplua.name
+									else
+										option(value=amplua.id)= amplua.name
+				.form-group.ph-1
+					label.col-sm-2.control-label Команда
+					.col-sm-10: .form-row
+						.col-xs-6
+						select(name='footballteam').form-control
+							option(value='') (выберите)
+							if footballteams
+								each team in footballteams
+									if footballsport && footballsport.team && (team._id.toString() == footballsport.team.toString())
+										option(value=team.id selected)= team.name
+									else
+										option(value=team.id)= team.name
+					
+				.form-group.ph-2
+					button(type='submit', data-loading-text="Сохраняем...").btn.btn-primary.ph-1 Сохранить профиль
+		.page-content.tile.ph-0.pv-2.mb-2.fright
+			.panel-heading
+				span.entypo.entypo-user
+				|  Сменить пароль
+			br
+			.ui-reveal.ph-1
+			.ui-reveal__initial
+			form(method='post', autocomplete='off')
+				input(type='hidden', name='action', value='profile.password')
+				.form-group.ph-1
+					label(for='change-passwordNew').sr-only Новый пароль
+					input(type='password', name='password', placeholder='Новый пароль', id='change-passwordNew').form-control
+				.form-group.ph-1
+					label(for='change-passwordConfirm').sr-only Подтвердите
+					input(type='password', name='password_confirm', placeholder='Подтвердите пароль', id='signin-passwordConfirm').form-control
+				.form-group.ph-1
+					button(type='submit', data-loading-text="Изменяем...").btn.btn-primary Сменить

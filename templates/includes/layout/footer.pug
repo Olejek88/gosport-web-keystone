@@ -1,0 +1,35 @@
+//- SITE FOOTER
+footer.site-footer.site-footer--sticky: .container
+	.row
+		.col-sm-4
+			h5.footer-heading О сервисе
+			p Организовывайте набор игроков на тренировку, турнир или игру с помощью нашего сервиса или ищите подходящую по времени и расположению площадку с нужным видом спорта и уровнем игроков. Быть может вы хотите просто поиграть с определенными людьми и не знаете их контактов.
+			ul.list-inline
+				li: a(href='http://gosport.ru') Больше о GoSport
+				li: a(href='mailto:admin@gosport.ru') Написать нам
+			p
+
+		.col-sm-8
+			.row
+				.col-xs-4
+					h5.footer-heading Пользователям
+					ul
+						if user
+							li: a(href='/me') Аккаунт
+							li: a(href='/teams') Команды
+							li: a(href='/stadiums') Площадки
+							li: a(href='/players') Игроки
+							li: a(href='/events') Турниры
+							li: a(href='/trainings') Тренировки
+							li: a(href='/mytrainings') Мои тренировки
+						else
+							li: a(href='/signin') Войти
+							li: a(href='/join') Зарегистрироваться
+				.col-xs-4
+					h5.footer-heading Помощь
+					ul
+						li: a(href='/logs') Журнал действий
+						li: a(href='/contacts') Контакты
+						li: a(href='/faq') Помощь
+	.row.footer-copyright
+		p Copyright &copy; 2017 GoSport!. Работает на <a href='http://keystonejs.com' rel='external'>KeystoneJS</a>.
