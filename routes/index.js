@@ -31,6 +31,7 @@ const routes = {
 	views: importRoutes('./views'),
 	auth: importRoutes('./auth'),
 	tools: importRoutes('./tools'),
+	api: importRoutes('./api')
 };
 
 // Setup Route Bindings
@@ -57,10 +58,11 @@ exports = module.exports = function (app) {
 	app.all('/meedit', routes.views.meedit);
 
 	// Stadiums
-	// app.all('/stadiums', routes.views.stadiums);
-	// app.all('/stadiumnew', routes.views.stadiumnew);
+	 app.all('/stadiums', routes.views.stadiums);
+	 app.all('/stadiumnew', routes.views.stadiumnew);
 	// app.all('/stadiumedit', routes.views.serviceedit);
-	// app.all('/stadium/:stadium', routes.views.stadium);
-	// app.all('/stadium/:id', routes.views.stadium);
-	// app.all('/stadium/:id/stadiumlist', routes.views.stadiumlist);
+	 app.all('/stadium/:stadium', routes.views.stadium);
+	 app.all('/stadium/:id', routes.views.stadium);
+
+	app.get('/api/stadiums', keystone.middleware.api, routes.api.stadiums.list);
 };

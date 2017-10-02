@@ -39,6 +39,7 @@ Stadium.add({
 		required: true, 
 		label: 'Фото' },
 	address: { type: Types.Location, initial: true, required: true, label: 'Адрес' },
+	adr: { type: String, initial: true, required: true, label: 'Адрес' },
 	createdAt: { type: Types.Datetime, default: Date.now },
 	updatedAt: { type: Types.Datetime, default: Date.now },
 });

@@ -1,0 +1,37 @@
+extends ../../layouts/default
+
+block intro
+
+block flash-messages
+
+block content
+	.container-sm
+		.page-intro
+			span.entypo.entypo-users(font-size:40px)
+			|   Площадки
+			| 
+			a(href='/stadiumnew', data-from=page.path).js-auth-trigger.btn.btn-primary.btn-small.mv-1
+				span +добавить площадку
+			br
+		if stadiums.length
+			each stadium in stadiums
+				if stadium
+					.page-content.tile.ph-0.pv-2.mb-2
+						.panel-heading
+							- var id = stadium._id;
+							span.entypo.entypo-cog
+							|  #
+							=stadium.stadiumId
+							if stadium.sport.name === 'Хоккей'
+								|  #{stadium.name} 
+								font.bblue Хоккей
+							if stadium.sport.name === 'Футбол'
+								|  #{stadium.name} 
+								font.bgreen Футбол
+							|  [ 
+							a(href='/stadium/' + id).text-muted редактировать
+							| ]
+						br
+						p.lead.ph-1 img(src=/images/upload/#{stadium.photo})
+						p.lead.ph-1 Название: #{stadium.address}
+						p.lead.ph-1 Описание: #{stadium.description}

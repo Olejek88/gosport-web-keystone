@@ -66,7 +66,7 @@ module.exports = function a(req, res) {
 				UserSport.model.findOne()
 				.where('user',req.user)
 				.where('sport', football)
-				.exec((err2, hockeysport) => {
+				.exec((err2, footballsport) => {
 					if (!req.body.footballteam)
 						req.body.footballteam = null;
 					if (!req.body.footballamplua)
