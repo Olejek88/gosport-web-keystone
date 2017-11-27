@@ -1,10 +1,10 @@
 var async = require('async'),
     keystone = require('keystone');
 
-var Stadium = keystone.list('Stadium');
+var Sport = keystone.list('Sport');
 
 exports.list = function(req, res) {
-    Stadium.model.find(function(err, items) {
+    Sport.model.find(function(err, items) {
 	
 	if (err) return res.apiError('database error', err);
 	

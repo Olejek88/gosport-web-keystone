@@ -52,6 +52,17 @@ module.exports = function a(req, res) {
 		});
 	});
 
+	view.on('render', (next) => {
+		UserTraining.model.find()
+		.where('user', req.user)
+		.populate('training')
+		.exec((err, trainings) => {
+			if (err) return res.err(err);
+			locals.usertrainings = trainings;
+			return next();
+		});
+	});
+
 	view.on('post', { action: 'profile.details' }, (next) => {
 		req.user.getUpdateHandler(req).process(req.body, {
 			fields: 'name, email',

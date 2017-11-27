@@ -6,6 +6,24 @@ var importRoutes = keystone.importer(__dirname);
 keystone.pre('routes', middleware.initLocals);
 keystone.pre('render', middleware.flashMessages);
 
+
+// Pass your keystone instance to the module
+var restful = require('restful-keystone')(keystone);
+exports = module.exports = function( app ){exports = module.exports = function( app ){
+	restful.expose({
+		Amplua : {
+			show : "sport name uuid createdAt updatedAt"
+		}
+	});
+};};
+
+restful.expose({
+	Level : {
+		populate : 'sport',
+		methods: ['retrieve','list']
+	}	
+});
+
 // Handle 404 errors
 keystone.set('404', (req, res, next) => {
 //	res.notfound();
@@ -65,4 +83,10 @@ exports = module.exports = function (app) {
 	 app.all('/stadium/:id', routes.views.stadium);
 
 	app.get('/api/stadiums', keystone.middleware.api, routes.api.stadiums.list);
+	app.get('/api/ampluas', keystone.middleware.api, routes.api.ampluas.list);
+	app.get('/api/levels', keystone.middleware.api, routes.api.levels.list);
+	app.get('/api/teams', keystone.middleware.api, routes.api.teams.list);
+	app.get('/api/sports', keystone.middleware.api, routes.api.sports.list);
+
+	app.post('/api/teams', keystone.middleware.api, routes.api.teams.create);
 };

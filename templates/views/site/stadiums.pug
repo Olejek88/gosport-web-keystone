@@ -7,7 +7,7 @@ block flash-messages
 block content
 	.container-sm
 		.page-intro
-			span.entypo.entypo-users(font-size:40px)
+			span.entypo.entypo-explore(font-size:40px)
 			|   Площадки
 			| 
 			a(href='/stadiumnew', data-from=page.path).js-auth-trigger.btn.btn-primary.btn-small.mv-1
@@ -32,6 +32,10 @@ block content
 							a(href='/stadium/' + id).text-muted редактировать
 							| ]
 						br
-						p.lead.ph-1 img(src=/images/upload/#{stadium.photo})
-						p.lead.ph-1 Название: #{stadium.address}
+						p.lead.ph-1 
+							img(src='/images/upload/' + stadium.photo.filename, width='250px', align='right')
+						p.lead.ph-1 Адрес: #{stadium.adr}
 						p.lead.ph-1 Описание: #{stadium.description}
+						br
+						br
+						br

@@ -12,7 +12,7 @@ keystone.init({
 	back: '/me',
 
 	 port: '3000',
-	 host: '127.0.0.1',
+	 host: '192.168.1.124',
 	 mongo: 'mongodb://localhost/gosport',
 	 'mongo options': { server: { keepAlive: 1 }},
 
@@ -58,9 +58,9 @@ keystone.set('nav', {
 keystone.set('email locals', {
   utils: keystone.utils,
   host: (function () {
-    if (keystone.get('env') === 'staging') return 'http://127.0.0.1';
+    if (keystone.get('env') === 'staging') return 'http://192.168.1.124';
     if (keystone.get('env') === 'production') return 'http://gosport.ru';
-    return (keystone.get('host') || 'http://localhost:') + (keystone.get('port') || '3000');
+    return (keystone.get('host') || 'http://192.168.1.124:') + (keystone.get('port') || '3000');
   }()),
 });
 

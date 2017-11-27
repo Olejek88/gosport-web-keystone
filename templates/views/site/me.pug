@@ -13,11 +13,11 @@ block content
 		.page-content.tile.ph-0.pv-2.mb-2
 			.panel-heading
 				span.entypo.entypo-user
-				|  #{user.playername}
+				|  #{user.name}
 			br
 			.div-right
 				if user.image
-					img(src='+user.image+',height='200px')
+					img(src='+#{user.image}+',height='200px')
 				else
 					img(src='/images/letsgosport.png')
 			p.lead.ph-1 e-mail: #{user.email}
@@ -42,50 +42,28 @@ block content
 					.page-content.tile.ph-0.pv-2.mb-2
 						.panel-heading
 							span.entypo.entypo-star
-							|  #{usersport.title}
+							|  #{usersport.sport.name}
 						br
-						p.lead.ph-1 амплуа: #{usersport.amplua.title}
-						p.lead.ph-1 уровень: #{usersport.level.name}
-						p.lead.ph-1 команда: #{usersport.team.name}
+						if usersport.amplua
+							p.lead.ph-1 амплуа: #{usersport.amplua.name}
+						if usersport.level
+							p.lead.ph-1 уровень: #{usersport.level.name}
+						if usersport.team
+							p.lead.ph-1 команда: #{usersport.team.name}
 		.page-content.tile.ph-0.pv-2.mb-2
 			.panel-heading
 				span.entypo.entypo-bell
-				|  Открытые тикеты
+				|  Мои тренировки
 			br
-			if tickets
-				each ticket in tickets
-					if ticket
+			if usertrainings
+				each usertraining in usertrainings
+					if usertraining
 						p.lead.ph-1 
-							font.bgray #{ticket._.createdAt.format('DD MMM YYYY hh:mm:ss')}
-							a(href='/ticket/' + ticket._id)|    ##{ticket.ticketId}
-							a(href='/ticket/' + ticket._id)|  #{ticket.name}
-							if ticket.ticketStatus === 'open'
-								font.status-label.opened| открыт
-							if ticket.ticketStatus === 'process'
-								font.status-label.process| в процессе
-							if ticket.ticketStatus === 'closed'
-								font.status-label.closed| закрыт
-			else
-				h3.text-muted Нет запросов
-		.page-content.tile.ph-0.pv-2.mb-2
-			.panel-heading
-				span.entypo.entypo-book
-				|  Последние транзакции
-							
-			br
-			if payments
-				each payment in payments
-					if payment
-						p.lead.ph-1 
-							font.bgray #{payment._.createdAt.format('DD MMM YYYY hh:mm:ss')}
-							a(href='/payment/' + payment._id)|    ##{payment.paymentId}
-							a(href='/payment/' + payment._id)|  #{payment.name}
-							if payment.status === 'new'
-								font.status-label.opened| не оплачен
-							if payment.status === 'no verified'
-								font.status-label.process| не подтвержден
-							if payment.status === 'verified'
-								font.status-label.closed| оплачен
-			else
-				h3.text-muted Нет
-
+							font.bgray #{usertraining.training._.date.format('DD MMM YYYY hh:mm:ss')}
+							a(href='/training/' + usertraining.training._id)|    ##{usertraining.training._id}
+							a(href='/training/' + usertraining.training._id)|  #{usertraining.training.name}
+							a(href='/stadium/' + usertraining.training.stadium._id)|  #{usertraining.training.stadium.name}	
+							if usertraining.training.sport.name === 'Хоккей'
+								font.status-label.opened| Хоккей
+							if usertraining.training.sport.name === 'Футбол'
+								font.status-label.process| Футбол
