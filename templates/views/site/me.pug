@@ -1,6 +1,15 @@
 extends ../../layouts/default
 
+
 block intro
+
+	-function formatDate(dateString){
+		-var date = new Date(dateString);
+		-var d = date.getDate();
+		-var m = date.getMonth()+1;
+		-var y = date.getFullYear();
+		-return d+' / '+m+' / '+y;
+	-}
 
 block flash-messages
 
@@ -30,7 +39,7 @@ block content
 			if user.type === 3
 				p.lead.ph-1 тип: 
 					font.bblue организатор и игрок
-			p.lead.ph-1 возраст: #{user.age}
+			p.lead.ph-1 дата рождения: #{formatDate(user.birthDate)}
 			p.lead.ph-1 телефон: #{user.phone}
 			p.lead.ph-1 профиль в контакте: 
 				a(href='+#{user.vk}+') #{user.vk}
