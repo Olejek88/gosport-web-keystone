@@ -2,14 +2,15 @@ extends ../layouts/default
 
 
 //- INCLUDES
-
+	
 //- INTRO
 block intro
 
 	//- HERO
 	if !user
 		h2.text-center Сервис GoSport!
-		//img(src='/images/mobile_head.png',align='center')
+		.div-center
+			img(src='/images/sports.jpg')
 	else
 
 //- BODY
@@ -28,7 +29,3 @@ block content
 				a(href='http://gosport.ru') Узнать больше о GoSport!
 //- JS
 block js
-
-	//- REACT SCRIPTS
-	script(src='/js/packages.js')
-	script(src='/js/home.js')

@@ -29,6 +29,7 @@ User.add({
 	name: { type: String, initial: true, required: true, index: true },
 	password: { type: Types.Password, initial: true, required: true },
 	type: { type: Number, default: 1, label: 'Type' },
+	birthDate: { type: Types.Date },	
 	age: { type: Number, default: 10, label: 'Age' },	
 	image: { 
 		type: Types.File, 

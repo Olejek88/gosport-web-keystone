@@ -18,7 +18,7 @@ module.exports = function a(req, res) {
 
 	view.on('post', { action: 'profile.details' }, (next) => {
 		req.user.getUpdateHandler(req).process(req.body, {
-			fields: 'name, email, type, age, phone, vk',
+			fields: 'name, email, type, birthDate, phone, vk',
 			flashErrors: true,
 		}, (err) => {
 			if (err) {
@@ -74,7 +74,7 @@ module.exports = function a(req, res) {
 					if (!req.body.footballlevel)
 						req.body.footballlevel = null;				
 
-					if (!hockeysport) {
+					if (!footballsport) {
 						new UserSport.model({
 							sport: football,
 							amplua: req.body.footballamplua,

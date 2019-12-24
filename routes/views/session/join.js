@@ -34,7 +34,7 @@ module.exports = function a(req, res) {
 						req.flash('error', 'Пользователь с таким е-мэйл уже существует');
 						return cb(true);
 					}
-
+					
 					return cb();
 				});
 			},
@@ -49,11 +49,11 @@ module.exports = function a(req, res) {
 				};
 
 				const User = keystone.list('User').model;
-				//console.log("set " + req.body.name + " " + req.body.email + " " + req.body.password);				
+				console.log("set " + req.body.name + " " + req.body.email + " " + req.body.password);				
 				const newUser = new User(userData);
 				//console.log(userData);
 				newUser.save(err => cb(err));
-				//console.log("save complete");
+				console.log("save complete");
 			},
 
 		], (err) => {
@@ -77,9 +77,10 @@ module.exports = function a(req, res) {
 				email: req.body.email,
 				password: req.body.password },
 			req, res, onSuccess, onFail);
-			return next();
+			//return next();
 		});
 	});
+	console.log("join");			
 	return view.render('session/join');
 };
 exports = module.exports;
