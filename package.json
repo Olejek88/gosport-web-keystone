@@ -8,7 +8,7 @@
     "dotenv": "4.0.0",
     "keystone": "^4.2.1",
     "keystone-email": "^1.1.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "node-bowser": "^0.1.1",
     "node-sass": "^4.13.0",
     "node-sass-middleware": "^0.11.0",
